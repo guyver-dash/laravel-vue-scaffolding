@@ -3,7 +3,6 @@
         <input type="texbox" v-model="email" /> <br />
         <input type="password" v-model="password" />
         <button @click="submit">Submit</button>
-        <button @click="showLogin">Show Login</button>
     </div>
 </template>
 <script>
@@ -26,10 +25,8 @@ export default {
                 .then(res => {
                     var token = res.data.success.token;
                     this.setToken(token);
+                    this.$router.push('/user/dashboard')
                 });
-        },
-        showLogin() {
-            axios.get("users");
         }
     }
 };

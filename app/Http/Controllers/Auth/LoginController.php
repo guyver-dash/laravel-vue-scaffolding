@@ -60,4 +60,15 @@ class LoginController extends Controller
             'user' => $user,
         ]);
     }
+    public function logout(Request $request)
+    {
+
+        if (Auth::check()) {
+            Auth::user()->AauthAcessToken()->delete();
+        }
+
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }

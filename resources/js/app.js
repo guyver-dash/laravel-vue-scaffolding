@@ -4,10 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require("./bootstrap");
+// require("./bootstrap");
 
 window.Vue = require("vue");
-
+window._ = require('lodash');
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from "./router/index.js";
 import store from "./store/index.js";
 import interceptorsSetup from "./boot/axios";
@@ -15,7 +22,7 @@ import interceptorsSetup from "./boot/axios";
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.needAuth)) {
         if (!store.getters["users/token"]) {
-            next("/login");
+            next("/login/user");
         } else {
             next();
         }

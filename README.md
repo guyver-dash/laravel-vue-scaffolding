@@ -1,1 +1,1 @@
-# laravel-vue-scaffolding
+# Laravel6-vue-vue-router-vuex

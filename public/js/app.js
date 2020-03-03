@@ -1980,6 +1980,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2000,7 +2006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.setToken(token);
 
-        _this.$router.push('/user/dashboard');
+        _this.$router.push("/user/dashboard");
       });
     }
   })
@@ -2049,9 +2055,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     success: function success(v) {
       this.alertShow = v;
+    },
+    add: function add() {
+      this.$refs.company.add();
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('company', ['company']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("company", ["company"]))
 });
 
 /***/ }),
@@ -2065,6 +2074,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_generic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form/generic */ "./resources/js/pages/companies/form/generic.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2083,63 +2100,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    formGeneric: _form_generic__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      variant: 'danger',
-      warningContent: 'Are you sure you want to delete?',
-      warning: true,
-      alertShow: false,
-      name: '',
-      address: '',
-      website: ''
+      alertShow: true,
+      successDialog: false,
+      responseError: false
     };
   },
-  methods: {
-    onSubmit: function onSubmit(evt) {
-      var _this = this;
-
-      evt.preventDefault();
-      axios["delete"]("companies/".concat(this.$route.params.id), {
-        name: this.name,
-        address: this.address,
-        website: this.website
-      }).then(function (res) {
-        _this.warning = false;
-      })["catch"](function (err) {
-        _this.variant = 'primary';
-        _this.warningContent = 'Integrity constraint...';
-      });
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("company", ["company"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])("company", ["setCompany"]), {
+    error: function error(v) {
+      this.responseError = true;
+      this.alertShow = false;
+      this.successDialog = false;
     },
-    getCompany: function getCompany() {
-      var _this2 = this;
-
-      axios.get("companies/".concat(this.$route.params.id, "/edit")).then(function (res) {
-        var c = res.data.company;
-        _this2.name = c.name;
-        _this2.address = c.address;
-        _this2.website = c.website;
-      });
+    success: function success(v) {
+      this.responseError = false;
+      this.alertShow = false;
+      this.successDialog = true;
+    },
+    deletee: function deletee() {
+      this.$refs.company.deletee();
     }
-  },
-  mounted: function mounted() {
-    this.getCompany();
-  }
+  })
 });
 
 /***/ }),
@@ -2153,6 +2142,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_generic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form/generic */ "./resources/js/pages/companies/form/generic.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2163,64 +2160,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    formGeneric: _form_generic__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      alertShow: false,
-      name: '',
-      address: '',
-      website: ''
+      alertShow: false
     };
   },
-  methods: {
-    onSubmit: function onSubmit(evt) {
-      var _this = this;
-
-      evt.preventDefault();
-      axios.put("companies/".concat(this.$route.params.id), {
-        name: this.name,
-        address: this.address,
-        website: this.website
-      }).then(function (res) {
-        _this.alertShow = true;
-      });
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("company", ["company"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])("company", ["setCompany"]), {
+    success: function success(v) {
+      this.alertShow = v;
     },
-    getCompany: function getCompany() {
-      var _this2 = this;
-
-      axios.get("companies/".concat(this.$route.params.id, "/edit")).then(function (res) {
-        var c = res.data.company;
-        _this2.name = c.name;
-        _this2.address = c.address;
-        _this2.website = c.website;
-      });
+    update: function update() {
+      this.$refs.company.update();
     }
-  },
-  mounted: function mounted() {
-    this.getCompany();
-  }
+  })
 });
 
 /***/ }),
@@ -2261,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['company'],
+  props: ["company"],
   data: function data() {
     return {
       locCompany: this.company
@@ -2269,17 +2228,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSubmit: function onSubmit(evt) {
+      evt.preventDefault();
+    },
+    add: function add() {
       var _this = this;
 
-      evt.preventDefault();
-      axios.post('companies', this.locCompany).then(function (res) {
+      axios.post("companies", this.locCompany).then(function (res) {
         _this.locCompany = {
-          name: '',
-          address: '',
-          website: ''
+          name: "",
+          address: "",
+          website: ""
         };
 
-        _this.$emit('success', true);
+        _this.$emit("success", true);
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      axios.put("companies/".concat(this.$route.params.id), this.locCompany).then(function (res) {
+        _this2.$emit("success", true);
+      });
+    },
+    deletee: function deletee() {
+      var _this3 = this;
+
+      axios["delete"]("companies/".concat(this.$route.params.id), this.locCompany).then(function (res) {
+        _this3.$emit("success", true);
+      })["catch"](function (err) {
+        _this3.$emit("error", true);
       });
     }
   },
@@ -2299,6 +2276,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2319,22 +2303,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      filter: '',
+      filter: "",
       fields: [{
-        key: 'name',
-        label: 'Name'
+        key: "name",
+        label: "Name"
       }, {
-        key: 'address',
-        label: 'Address'
+        key: "address",
+        label: "Address"
       }, {
-        key: 'website',
-        label: 'Website'
+        key: "website",
+        label: "Website"
       }, {
-        key: 'action',
-        label: 'Actions'
+        key: "action",
+        label: "Actions"
       }],
       page: 1,
       perPage: 10,
@@ -2343,17 +2337,48 @@ __webpack_require__.r(__webpack_exports__);
       companies: []
     };
   },
-  methods: {
-    functionName: function functionName() {},
-    getCompanies: function getCompanies() {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("company", ["setCompany"]), {
+    addCompany: function addCompany() {
+      this.setCompany({
+        name: "",
+        address: "",
+        website: ""
+      });
+      this.$router.push({
+        path: "/companies/create"
+      });
+    },
+    edit: function edit(id) {
       var _this = this;
 
+      axios.get("companies/".concat(id, "/edit")).then(function (res) {
+        _this.setCompany(res.data.company);
+
+        _this.$router.push({
+          path: "/companies/".concat(id, "/edit")
+        });
+      });
+    },
+    deletee: function deletee(id) {
+      var _this2 = this;
+
+      axios.get("companies/".concat(id, "/edit")).then(function (res) {
+        _this2.setCompany(res.data.company);
+
+        _this2.$router.push({
+          path: "/companies/".concat(id, "/delete")
+        });
+      });
+    },
+    getCompanies: function getCompanies() {
+      var _this3 = this;
+
       axios.get("companies?page=".concat(this.currentPage, "&perPage=").concat(this.perPage, "&filter=").concat(this.filter)).then(function (res) {
-        _this.companies = _.values(res.data.companies.data);
-        _this.rows = res.data.companies.total;
+        _this3.companies = _.values(res.data.companies.data);
+        _this3.rows = res.data.companies.total;
       });
     }
-  },
+  }),
   mounted: function mounted() {
     this.getCompanies();
   },
@@ -60501,7 +60526,7 @@ var render = function() {
             [
               _c("b-form-input", {
                 staticClass: "mb-sm-2",
-                attrs: { placeholder: "Enter your email" },
+                attrs: { placeholder: "Enter your email", required: "" },
                 model: {
                   value: _vm.email,
                   callback: function($$v) {
@@ -60513,7 +60538,11 @@ var render = function() {
               _vm._v(" "),
               _c("b-form-input", {
                 staticClass: "mb-sm-2",
-                attrs: { type: "password", placeholder: "Password" },
+                attrs: {
+                  type: "password",
+                  placeholder: "Password",
+                  required: ""
+                },
                 model: {
                   value: _vm.password,
                   callback: function($$v) {
@@ -60579,9 +60608,14 @@ var render = function() {
           on: { success: _vm.success }
         },
         [
-          _c("b-button", { attrs: { variant: "primary", type: "submit" } }, [
-            _vm._v("Save")
-          ])
+          _c(
+            "b-button",
+            {
+              attrs: { variant: "primary", type: "submit" },
+              on: { click: _vm.add }
+            },
+            [_vm._v("Save")]
+          )
         ],
         1
       )
@@ -60618,14 +60652,8 @@ var render = function() {
       _vm._v(" "),
       _c(
         "b-alert",
-        {
-          attrs: {
-            variant: _vm.variant,
-            show: _vm.warning === true,
-            dismissible: ""
-          }
-        },
-        [_vm._v(_vm._s(_vm.warningContent))]
+        { attrs: { variant: "danger", show: _vm.alertShow, dismissible: "" } },
+        [_vm._v("Are you sure you want to delete?")]
       ),
       _vm._v(" "),
       _c(
@@ -60633,78 +60661,38 @@ var render = function() {
         {
           attrs: {
             variant: "success",
-            show: _vm.warning === false,
+            show: _vm.successDialog,
             dismissible: ""
           }
         },
-        [_vm._v("Company deleted successfuly.")]
+        [_vm._v("Company deleted successfully")]
       ),
       _vm._v(" "),
-      _vm.warning === true
+      _c(
+        "b-alert",
+        {
+          attrs: { variant: "info", show: _vm.responseError, dismissible: "" }
+        },
+        [_vm._v("Integrity constraint...")]
+      ),
+      _vm._v(" "),
+      _vm.successDialog === false
         ? _c(
-            "b-form",
-            { on: { submit: _vm.onSubmit } },
+            "form-generic",
+            {
+              ref: "company",
+              attrs: { company: _vm.company },
+              on: { success: _vm.success, error: _vm.error }
+            },
             [
               _c(
-                "label",
+                "b-button",
                 {
-                  staticClass: "sr-only",
-                  attrs: { for: "inline-form-input-name" }
+                  attrs: { variant: "danger", type: "submit" },
+                  on: { click: _vm.deletee }
                 },
-                [_vm._v("Name")]
-              ),
-              _vm._v(" "),
-              _c("b-input", {
-                staticClass: "mb-sm-2",
-                attrs: {
-                  id: "inline-form-input-name",
-                  placeholder: "Company Name",
-                  required: ""
-                },
-                model: {
-                  value: _vm.name,
-                  callback: function($$v) {
-                    _vm.name = $$v
-                  },
-                  expression: "name"
-                }
-              }),
-              _vm._v(" "),
-              _c("b-input", {
-                staticClass: "mb-sm-2",
-                attrs: {
-                  id: "inline-form-input-name",
-                  placeholder: "Address",
-                  required: ""
-                },
-                model: {
-                  value: _vm.address,
-                  callback: function($$v) {
-                    _vm.address = $$v
-                  },
-                  expression: "address"
-                }
-              }),
-              _vm._v(" "),
-              _c("b-input", {
-                staticClass: "mb-sm-2",
-                attrs: {
-                  id: "inline-form-input-name",
-                  placeholder: "Website",
-                  required: ""
-                },
-                model: {
-                  value: _vm.website,
-                  callback: function($$v) {
-                    _vm.website = $$v
-                  },
-                  expression: "website"
-                }
-              }),
-              _vm._v(" "),
-              _c("b-button", { attrs: { variant: "danger", type: "submit" } }, [
-                _vm._v("Confirm Delete")
-              ])
+                [_vm._v("Delete")]
+              )
             ],
             1
           )
@@ -60747,69 +60735,21 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "b-form",
-        { on: { submit: _vm.onSubmit } },
+        "form-generic",
+        {
+          ref: "company",
+          attrs: { company: _vm.company },
+          on: { success: _vm.success }
+        },
         [
           _c(
-            "label",
+            "b-button",
             {
-              staticClass: "sr-only",
-              attrs: { for: "inline-form-input-name" }
+              attrs: { variant: "primary", type: "submit" },
+              on: { click: _vm.update }
             },
-            [_vm._v("Name")]
-          ),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Company Name",
-              required: ""
-            },
-            model: {
-              value: _vm.name,
-              callback: function($$v) {
-                _vm.name = $$v
-              },
-              expression: "name"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Address",
-              required: ""
-            },
-            model: {
-              value: _vm.address,
-              callback: function($$v) {
-                _vm.address = $$v
-              },
-              expression: "address"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Website",
-              required: ""
-            },
-            model: {
-              value: _vm.website,
-              callback: function($$v) {
-                _vm.website = $$v
-              },
-              expression: "website"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-button", { attrs: { variant: "primary", type: "submit" } }, [
-            _vm._v("Update")
-          ])
+            [_vm._v("Update")]
+          )
         ],
         1
       )
@@ -60851,11 +60791,11 @@ var render = function() {
           required: ""
         },
         model: {
-          value: _vm.company.name,
+          value: _vm.locCompany.name,
           callback: function($$v) {
-            _vm.$set(_vm.company, "name", $$v)
+            _vm.$set(_vm.locCompany, "name", $$v)
           },
-          expression: "company.name"
+          expression: "locCompany.name"
         }
       }),
       _vm._v(" "),
@@ -60867,11 +60807,11 @@ var render = function() {
           required: ""
         },
         model: {
-          value: _vm.company.address,
+          value: _vm.locCompany.address,
           callback: function($$v) {
-            _vm.$set(_vm.company, "address", $$v)
+            _vm.$set(_vm.locCompany, "address", $$v)
           },
-          expression: "company.address"
+          expression: "locCompany.address"
         }
       }),
       _vm._v(" "),
@@ -60883,11 +60823,11 @@ var render = function() {
           required: ""
         },
         model: {
-          value: _vm.company.website,
+          value: _vm.locCompany.website,
           callback: function($$v) {
-            _vm.$set(_vm.company, "website", $$v)
+            _vm.$set(_vm.locCompany, "website", $$v)
           },
-          expression: "company.website"
+          expression: "locCompany.website"
         }
       }),
       _vm._v(" "),
@@ -60938,7 +60878,8 @@ var render = function() {
         "b-button",
         {
           staticStyle: { "margin-bottom": "5px" },
-          attrs: { variant: "primary", to: "/companies/create" }
+          attrs: { variant: "primary" },
+          on: { click: _vm.addCompany }
         },
         [_vm._v("Add Company")]
       ),
@@ -60960,21 +60901,25 @@ var render = function() {
                   "b-button",
                   {
                     staticStyle: { "margin-bottom": "5px" },
-                    attrs: {
-                      variant: "info",
-                      to: "/companies/" + data.item.id + "/edit"
+                    attrs: { variant: "info" },
+                    on: {
+                      click: function($event) {
+                        return _vm.edit("" + data.item.id)
+                      }
                     }
                   },
-                  [_vm._v(" Edit")]
+                  [_vm._v("Edit")]
                 ),
                 _vm._v(" "),
                 _c(
                   "b-button",
                   {
                     staticStyle: { "margin-bottom": "5px" },
-                    attrs: {
-                      variant: "danger",
-                      to: "/companies/" + data.item.id + "/delete"
+                    attrs: { variant: "danger" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deletee("" + data.item.id)
+                      }
                     }
                   },
                   [_vm._v("Delete")]

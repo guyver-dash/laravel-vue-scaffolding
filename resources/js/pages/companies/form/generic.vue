@@ -1,21 +1,21 @@
 <template>
-    <b-form @submit="onSubmit">
+  <b-form @submit="onSubmit">
     <b-input
-      v-model="company.name"
+      v-model="locCompany.name"
       id="inline-form-input-name"
       class="mb-sm-2"
       placeholder="Company Name"
       required
     ></b-input>
-     <b-input
-      v-model="company.address"
+    <b-input
+      v-model="locCompany.address"
       id="inline-form-input-name"
       class="mb-sm-2"
       placeholder="Address"
       required
     ></b-input>
     <b-input
-      v-model="company.website"
+      v-model="locCompany.website"
       id="inline-form-input-name"
       class="mb-sm-2"
       placeholder="Website"
@@ -26,27 +26,46 @@
 </template>
 <script>
 export default {
-    props: ['company'],
-    data(){
-      return {
-        locCompany: this.company
-      }
+  props: ["company"],
+  data() {
+    return {
+      locCompany: this.company
+    };
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault();
     },
-    methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        axios.post('companies', this.locCompany).then(res => {
-                this.locCompany = {
-                  name: '',
-                  address: '',
-                  website: ''
-                }
-                this.$emit('success', true)
-            })
-      }
+    add() {
+      axios.post("companies", this.locCompany).then(res => {
+        this.locCompany = {
+          name: "",
+          address: "",
+          website: ""
+        };
+        this.$emit("success", true);
+      });
     },
-    mounted(){
-      this.locCompany = this.company
+    update() {
+      axios
+        .put(`companies/${this.$route.params.id}`, this.locCompany)
+        .then(res => {
+          this.$emit("success", true);
+        });
+    },
+    deletee() {
+      axios
+        .delete(`companies/${this.$route.params.id}`, this.locCompany)
+        .then(res => {
+          this.$emit("success", true);
+        })
+        .catch(err => {
+          this.$emit("error", true);
+        });
     }
-}
+  },
+  mounted() {
+    this.locCompany = this.company;
+  }
+};
 </script>

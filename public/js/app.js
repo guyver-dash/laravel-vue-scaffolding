@@ -1934,8 +1934,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])("users", ["user"])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("users", ["setToken"]), {
     logout: function logout() {
       var _this = this;
@@ -1944,7 +1946,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.setToken(null);
 
         _this.$router.push({
-          path: '/'
+          path: "/"
         });
       });
     }
@@ -1994,7 +1996,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       password: ""
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("users", ["setToken"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("users", ["setToken", "setUser"]), {
     submit: function submit() {
       var _this = this;
 
@@ -2005,6 +2007,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var token = res.data.success.token;
 
         _this.setToken(token);
+
+        _this.setUser(res.data.user);
 
         _this.$router.push("/user/dashboard");
       });
@@ -2403,6 +2407,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_generic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form/generic */ "./resources/js/pages/employees/form/generic.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2413,77 +2425,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    formGeneric: _form_generic__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       companies: [],
-      alertShow: false,
-      company_id: null,
-      firstname: '',
-      lastname: '',
-      email: '',
-      phone: ''
+      alertShow: false
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("employees", ["employee"])),
   methods: {
-    onSubmit: function onSubmit(evt) {
-      var _this = this;
-
-      evt.preventDefault();
-      axios.post('employees', {
-        company_id: this.company_id,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        email: this.email,
-        phone: this.phone
-      }).then(function (res) {
-        _this.alertShow = true;
-      });
+    success: function success(v) {
+      this.alertShow = true;
     },
-    getCompanies: function getCompanies() {
-      var _this2 = this;
-
-      axios.get('employees_companies').then(function (res) {
-        _this2.companies = res.data.companies;
-      });
+    save: function save() {
+      this.$refs.employee.add();
     }
-  },
-  mounted: function mounted() {
-    this.getCompanies();
   }
 });
 
@@ -2604,6 +2565,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_generic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form/generic */ "./resources/js/pages/employees/form/generic.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2614,99 +2583,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    formGeneric: _form_generic__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       companies: [],
-      alertShow: false,
-      company_id: null,
-      firstname: '',
-      lastname: '',
-      email: '',
-      phone: ''
+      alertShow: false
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("employees", ["employee"])),
   methods: {
-    onSubmit: function onSubmit(evt) {
-      var _this = this;
-
-      evt.preventDefault();
-      axios.put("employees/".concat(this.$route.params.id), {
-        company_id: this.company_id,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        email: this.email,
-        phone: this.phone
-      }).then(function (res) {
-        _this.alertShow = true;
-      });
+    success: function success(v) {
+      this.alertShow = true;
     },
-    getCompanies: function getCompanies() {
-      var _this2 = this;
-
-      axios.get('employees_companies').then(function (res) {
-        _this2.companies = res.data.companies;
-      });
-    },
-    getEmployee: function getEmployee() {
-      var _this3 = this;
-
-      axios.get("employees/".concat(this.$route.params.id, "/edit")).then(function (res) {
-        var e = res.data.employee;
-        _this3.company_id = e.company_id;
-        _this3.firstname = e.firstname;
-        _this3.lastname = e.lastname;
-        _this3.email = e.email;
-        _this3.phone = e.phone;
-      });
+    update: function update() {
+      this.$refs.employee.update();
     }
-  },
-  mounted: function mounted() {
-    this.getCompanies();
-    this.getEmployee();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/index.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/employees/index.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2732,25 +2637,136 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["employee"],
+  data: function data() {
+    return {
+      companies: [],
+      locEmployee: this.employee
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit(evt) {
+      evt.preventDefault();
+    },
+    add: function add() {
+      var _this = this;
+
+      axios.post("employees", this.locEmployee).then(function (res) {
+        _this.locEmployee = {
+          company_id: null,
+          firstname: "",
+          lastname: "",
+          email: "",
+          phone: ""
+        };
+
+        _this.$emit("success", true);
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      axios.put("employees/".concat(this.$route.params.id), this.locEmployee).then(function (res) {
+        _this2.$emit("success", true);
+      });
+    },
+    getCompanies: function getCompanies() {
+      var _this3 = this;
+
+      axios.get("employees_companies").then(function (res) {
+        _this3.companies = res.data.companies;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getCompanies();
+    this.locEmployee = this.employee;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/employees/index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      filter: '',
+      filter: "",
       fields: [{
-        key: 'name',
-        label: 'Name'
+        key: "name",
+        label: "Name"
       }, {
-        key: 'email',
-        label: 'Email'
+        key: "email",
+        label: "Email"
       }, {
-        key: 'phone',
-        label: 'Phone'
+        key: "phone",
+        label: "Phone"
       }, {
-        key: 'company',
-        label: 'Company'
+        key: "company",
+        label: "Company"
       }, {
-        key: 'action',
-        label: 'Actions'
+        key: "action",
+        label: "Actions"
       }],
       page: 1,
       perPage: 10,
@@ -2759,17 +2775,50 @@ __webpack_require__.r(__webpack_exports__);
       employees: []
     };
   },
-  methods: {
-    functionName: function functionName() {},
-    getEmployees: function getEmployees() {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("employees", ["setEmployee"]), {
+    edit: function edit(id) {
       var _this = this;
 
+      axios.get("employees/".concat(id, "/edit")).then(function (res) {
+        _this.setEmployee(res.data.employee);
+
+        _this.$router.push({
+          path: "/employees/".concat(id, "/edit")
+        });
+      });
+    },
+    deletee: function deletee(id) {
+      var _this2 = this;
+
+      axios.get("employees/".concat(id, "/edit")).then(function (res) {
+        _this2.setEmployee(res.data.employee);
+
+        _this2.$router.push({
+          path: "/employees/".concat(id, "/delete")
+        });
+      });
+    },
+    add: function add() {
+      this.setEmployee({
+        company_id: null,
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+      });
+      this.$router.push({
+        path: "/employees/create"
+      });
+    },
+    getEmployees: function getEmployees() {
+      var _this3 = this;
+
       axios.get("employees?page=".concat(this.currentPage, "&perPage=").concat(this.perPage, "&filter=").concat(this.filter)).then(function (res) {
-        _this.employees = _.values(res.data.employees.data);
-        _this.rows = res.data.employees.total;
+        _this3.employees = _.values(res.data.employees.data);
+        _this3.rows = res.data.employees.total;
       });
     }
-  },
+  }),
   mounted: function mounted() {
     this.getEmployees();
   },
@@ -60444,7 +60493,7 @@ var render = function() {
     _c(
       "p",
       [
-        _vm._v("\n        Welcome to Dashboard "),
+        _vm._v("\n    Welcome to Dashboard\n    "),
         _c(
           "b-button",
           {
@@ -60464,9 +60513,13 @@ var render = function() {
         _c(
           "b-list-group",
           [
-            _c("b-list-group-item", { attrs: { to: "/dashboard/companies" } }, [
-              _vm._v("All Companies")
-            ]),
+            _vm.user.company === null
+              ? _c(
+                  "b-list-group-item",
+                  { attrs: { to: "/dashboard/companies" } },
+                  [_vm._v("All Companies")]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c("b-list-group-item", { attrs: { to: "/dashboard/employees" } }, [
               _vm._v("All Employees")
@@ -60982,104 +61035,21 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "b-form",
-        { on: { submit: _vm.onSubmit } },
+        "form-generic",
+        {
+          ref: "employee",
+          attrs: { employee: _vm.employee },
+          on: { success: _vm.success }
+        },
         [
-          _c("b-form-select", {
-            staticClass: "mb-sm-2",
-            attrs: { options: _vm.companies },
-            scopedSlots: _vm._u([
-              {
-                key: "first",
-                fn: function() {
-                  return [
-                    _c(
-                      "b-form-select-option",
-                      { attrs: { value: null, disabled: "" } },
-                      [_vm._v("-- Please select company --")]
-                    )
-                  ]
-                },
-                proxy: true
-              }
-            ]),
-            model: {
-              value: _vm.company_id,
-              callback: function($$v) {
-                _vm.company_id = $$v
-              },
-              expression: "company_id"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Firstname",
-              required: ""
+          _c(
+            "b-button",
+            {
+              attrs: { variant: "primary", type: "submit" },
+              on: { click: _vm.save }
             },
-            model: {
-              value: _vm.firstname,
-              callback: function($$v) {
-                _vm.firstname = $$v
-              },
-              expression: "firstname"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Lastname",
-              required: ""
-            },
-            model: {
-              value: _vm.lastname,
-              callback: function($$v) {
-                _vm.lastname = $$v
-              },
-              expression: "lastname"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              type: "email",
-              id: "inline-form-input-name",
-              placeholder: "Email",
-              required: ""
-            },
-            model: {
-              value: _vm.email,
-              callback: function($$v) {
-                _vm.email = $$v
-              },
-              expression: "email"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Phone",
-              required: ""
-            },
-            model: {
-              value: _vm.phone,
-              callback: function($$v) {
-                _vm.phone = $$v
-              },
-              expression: "phone"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-button", { attrs: { variant: "primary", type: "submit" } }, [
-            _vm._v("Save")
-          ])
+            [_vm._v("Save")]
+          )
         ],
         1
       )
@@ -61285,109 +61255,149 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "b-form",
-        { on: { submit: _vm.onSubmit } },
+        "form-generic",
+        {
+          ref: "employee",
+          attrs: { employee: _vm.employee },
+          on: { success: _vm.success }
+        },
         [
-          _c("b-form-select", {
-            staticClass: "mb-sm-2",
-            attrs: { options: _vm.companies },
-            scopedSlots: _vm._u([
-              {
-                key: "first",
-                fn: function() {
-                  return [
-                    _c(
-                      "b-form-select-option",
-                      { attrs: { value: null, disabled: "" } },
-                      [_vm._v("-- Please select company --")]
-                    )
-                  ]
-                },
-                proxy: true
-              }
-            ]),
-            model: {
-              value: _vm.company_id,
-              callback: function($$v) {
-                _vm.company_id = $$v
-              },
-              expression: "company_id"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Firstname",
-              required: ""
+          _c(
+            "b-button",
+            {
+              attrs: { variant: "primary", type: "submit" },
+              on: { click: _vm.update }
             },
-            model: {
-              value: _vm.firstname,
-              callback: function($$v) {
-                _vm.firstname = $$v
-              },
-              expression: "firstname"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Lastname",
-              required: ""
-            },
-            model: {
-              value: _vm.lastname,
-              callback: function($$v) {
-                _vm.lastname = $$v
-              },
-              expression: "lastname"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              type: "email",
-              id: "inline-form-input-name",
-              placeholder: "Email",
-              required: ""
-            },
-            model: {
-              value: _vm.email,
-              callback: function($$v) {
-                _vm.email = $$v
-              },
-              expression: "email"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-input", {
-            staticClass: "mb-sm-2",
-            attrs: {
-              id: "inline-form-input-name",
-              placeholder: "Phone",
-              required: ""
-            },
-            model: {
-              value: _vm.phone,
-              callback: function($$v) {
-                _vm.phone = $$v
-              },
-              expression: "phone"
-            }
-          }),
-          _vm._v(" "),
-          _c("b-button", { attrs: { variant: "primary", type: "submit" } }, [
-            _vm._v("Update")
-          ])
+            [_vm._v("Update")]
+          )
         ],
         1
       )
     ],
     1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-form",
+    { on: { submit: _vm.onSubmit } },
+    [
+      _c("b-form-select", {
+        staticClass: "mb-sm-2",
+        attrs: { options: _vm.companies },
+        scopedSlots: _vm._u([
+          {
+            key: "first",
+            fn: function() {
+              return [
+                _c(
+                  "b-form-select-option",
+                  { attrs: { value: null, disabled: "" } },
+                  [_vm._v("-- Please select company --")]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ]),
+        model: {
+          value: _vm.locEmployee.company_id,
+          callback: function($$v) {
+            _vm.$set(_vm.locEmployee, "company_id", $$v)
+          },
+          expression: "locEmployee.company_id"
+        }
+      }),
+      _vm._v(" "),
+      _c("b-input", {
+        staticClass: "mb-sm-2",
+        attrs: {
+          id: "inline-form-input-name",
+          placeholder: "Firstname",
+          required: ""
+        },
+        model: {
+          value: _vm.locEmployee.firstname,
+          callback: function($$v) {
+            _vm.$set(_vm.locEmployee, "firstname", $$v)
+          },
+          expression: "locEmployee.firstname"
+        }
+      }),
+      _vm._v(" "),
+      _c("b-input", {
+        staticClass: "mb-sm-2",
+        attrs: {
+          id: "inline-form-input-name",
+          placeholder: "Lastname",
+          required: ""
+        },
+        model: {
+          value: _vm.locEmployee.lastname,
+          callback: function($$v) {
+            _vm.$set(_vm.locEmployee, "lastname", $$v)
+          },
+          expression: "locEmployee.lastname"
+        }
+      }),
+      _vm._v(" "),
+      _c("b-input", {
+        staticClass: "mb-sm-2",
+        attrs: {
+          type: "email",
+          id: "inline-form-input-name",
+          placeholder: "Email",
+          required: ""
+        },
+        model: {
+          value: _vm.locEmployee.email,
+          callback: function($$v) {
+            _vm.$set(_vm.locEmployee, "email", $$v)
+          },
+          expression: "locEmployee.email"
+        }
+      }),
+      _vm._v(" "),
+      _c("b-input", {
+        staticClass: "mb-sm-2",
+        attrs: {
+          id: "inline-form-input-name",
+          placeholder: "Phone",
+          required: ""
+        },
+        model: {
+          value: _vm.locEmployee.phone,
+          callback: function($$v) {
+            _vm.$set(_vm.locEmployee, "phone", $$v)
+          },
+          expression: "locEmployee.phone"
+        }
+      }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -61432,7 +61442,8 @@ var render = function() {
         "b-button",
         {
           staticStyle: { "margin-bottom": "5px" },
-          attrs: { variant: "primary", to: "/employees/create" }
+          attrs: { variant: "primary" },
+          on: { click: _vm.add }
         },
         [_vm._v("Add Employee")]
       ),
@@ -61454,21 +61465,25 @@ var render = function() {
                   "b-button",
                   {
                     staticStyle: { "margin-bottom": "5px" },
-                    attrs: {
-                      variant: "info",
-                      to: "/employees/" + data.item.id + "/edit"
+                    attrs: { variant: "info" },
+                    on: {
+                      click: function($event) {
+                        return _vm.edit(data.item.id)
+                      }
                     }
                   },
-                  [_vm._v(" Edit")]
+                  [_vm._v("Edit")]
                 ),
                 _vm._v(" "),
                 _c(
                   "b-button",
                   {
                     staticStyle: { "margin-bottom": "5px" },
-                    attrs: {
-                      variant: "danger",
-                      to: "/employees/" + data.item.id + "/delete"
+                    attrs: { variant: "danger" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deletee(data.item.id)
+                      }
                     }
                   },
                   [_vm._v("Delete")]
@@ -78461,6 +78476,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/employees/form/generic.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/pages/employees/form/generic.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generic.vue?vue&type=template&id=7c1c0b7f& */ "./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f&");
+/* harmony import */ var _generic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./generic.vue?vue&type=script&lang=js& */ "./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _generic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/employees/form/generic.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_generic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./generic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/form/generic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_generic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./generic.vue?vue&type=template&id=7c1c0b7f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/employees/form/generic.vue?vue&type=template&id=7c1c0b7f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_generic_vue_vue_type_template_id_7c1c0b7f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/employees/index.vue":
 /*!************************************************!*\
   !*** ./resources/js/pages/employees/index.vue ***!
@@ -78757,6 +78841,103 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/employees/actions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/employees/actions.js ***!
+  \*************************************************/
+/*! exports provided: setEmployee */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEmployee", function() { return setEmployee; });
+var setEmployee = function setEmployee(_ref, payload) {
+  var commit = _ref.commit;
+  commit("setEmployee", payload);
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/employees/getters.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/employees/getters.js ***!
+  \*************************************************/
+/*! exports provided: employee */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "employee", function() { return employee; });
+var employee = function employee(state) {
+  return state.employee;
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/employees/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/employees/index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./resources/js/store/employees/state.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/store/employees/getters.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/employees/mutations.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./resources/js/store/employees/actions.js");
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: _state__WEBPACK_IMPORTED_MODULE_0__["default"],
+  getters: _getters__WEBPACK_IMPORTED_MODULE_1__,
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_3__
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/employees/mutations.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/employees/mutations.js ***!
+  \***************************************************/
+/*! exports provided: setEmployee */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEmployee", function() { return setEmployee; });
+var setEmployee = function setEmployee(state, payload) {
+  state.employee = payload;
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/employees/state.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/employees/state.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  employee: {
+    company_id: null,
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: ""
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -78771,7 +78952,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users */ "./resources/js/store/users/index.js");
 /* harmony import */ var _company__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./company */ "./resources/js/store/company/index.js");
-/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+/* harmony import */ var _employees__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./employees */ "./resources/js/store/employees/index.js");
+/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+
 
 
 
@@ -78779,10 +78962,11 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var Store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  plugins: [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__["default"])()],
+  plugins: [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_5__["default"])()],
   modules: {
     users: _users__WEBPACK_IMPORTED_MODULE_2__["default"],
-    company: _company__WEBPACK_IMPORTED_MODULE_3__["default"]
+    company: _company__WEBPACK_IMPORTED_MODULE_3__["default"],
+    employees: _employees__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (Store);
@@ -78793,15 +78977,20 @@ var Store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!*********************************************!*\
   !*** ./resources/js/store/users/actions.js ***!
   \*********************************************/
-/*! exports provided: setToken */
+/*! exports provided: setToken, setUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUser", function() { return setUser; });
 var setToken = function setToken(_ref, payload) {
   var commit = _ref.commit;
   commit("setToken", payload);
+};
+var setUser = function setUser(_ref2, payload) {
+  var commit = _ref2.commit;
+  commit("setUser", payload);
 };
 
 /***/ }),
@@ -78810,14 +78999,18 @@ var setToken = function setToken(_ref, payload) {
 /*!*********************************************!*\
   !*** ./resources/js/store/users/getters.js ***!
   \*********************************************/
-/*! exports provided: token */
+/*! exports provided: token, user */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "token", function() { return token; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 var token = function token(state) {
   return state.token;
+};
+var user = function user(state) {
+  return state.user;
 };
 
 /***/ }),
@@ -78853,14 +79046,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./resources/js/store/users/mutations.js ***!
   \***********************************************/
-/*! exports provided: setToken */
+/*! exports provided: setToken, setUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUser", function() { return setUser; });
 var setToken = function setToken(state, payload) {
   state.token = payload;
+};
+var setUser = function setUser(state, payload) {
+  state.user = payload;
 };
 
 /***/ }),
@@ -78875,7 +79072,10 @@ var setToken = function setToken(state, payload) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  token: null
+  token: null,
+  user: {
+    company: null
+  }
 });
 
 /***/ }),

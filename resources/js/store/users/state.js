@@ -1,3 +1,6 @@
 export default {
-    token: null
+    token: null,
+    user: {
+        company: null
+    }
 };

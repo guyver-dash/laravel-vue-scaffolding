@@ -25,7 +25,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("users", ["setToken"]),
+    ...mapActions("users", ["setToken", "setUser"]),
     submit() {
       axios
         .post("login", {
@@ -35,6 +35,7 @@ export default {
         .then(res => {
           var token = res.data.success.token;
           this.setToken(token);
+          this.setUser(res.data.user);
           this.$router.push("/user/dashboard");
         });
     }

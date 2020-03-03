@@ -2,7 +2,7 @@
 <div>
     <h5>New Company</h5>
     <b-alert variant="success" :show="alertShow" dismissible>Company created successfully.</b-alert>
-  <b-form @submit="onSubmit">
+  <!-- <b-form @submit="onSubmit">
     <label class="sr-only" for="inline-form-input-name">Name</label>
     <b-input
       v-model="name"
@@ -26,31 +26,27 @@
       required
     ></b-input>
     <b-button variant="primary" type="submit">Save</b-button>
-  </b-form>
+  </b-form> -->
+  <form-generic :company="company" ref="company">
+    <b-button variant="primary" type="submit">Save</b-button>
+  </form-generic>
 </div>
 </template>
 
 <script>
+import formGeneric from './form/generic'
+import { mapState } from 'vuex'
 export default {
+    components: {
+      formGeneric
+    },
     data(){
         return {
-            alertShow: false,
-            name: '',
-            address: '',
-            website: ''
+            alertShow: false
         }
     },
-    methods: {
-        onSubmit(evt) {
-        evt.preventDefault()
-        axios.post('companies', {
-                name: this.name,
-                address: this.address,
-                website: this.website
-            }).then(res => {
-                this.alertShow = true
-            })
-      }
+    computed: {
+      ...mapState('company', ['company'])
     }
 
 }

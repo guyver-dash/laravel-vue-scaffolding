@@ -69,6 +69,16 @@ export default {
           this.$emit("success", true);
         });
     },
+    deletee() {
+      axios
+        .delete(`employees/${this.$route.params.id}`, this.locEmployee)
+        .then(res => {
+          this.$emit("success", true);
+        })
+        .catch(err => {
+          this.$emit("error", true);
+        });
+    },
     getCompanies() {
       axios.get("employees_companies").then(res => {
         this.companies = res.data.companies;

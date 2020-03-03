@@ -36,7 +36,12 @@ export default {
       onSubmit(evt) {
         evt.preventDefault()
         axios.post('companies', this.locCompany).then(res => {
-                this.alertShow = true
+                this.locCompany = {
+                  name: '',
+                  address: '',
+                  website: ''
+                }
+                this.$emit('success', true)
             })
       }
     },

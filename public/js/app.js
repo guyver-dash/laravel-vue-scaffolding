@@ -2035,31 +2035,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2070,6 +2045,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       alertShow: false
     };
+  },
+  methods: {
+    success: function success(v) {
+      this.alertShow = v;
+    }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('company', ['company']))
 });
@@ -2293,7 +2273,13 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       axios.post('companies', this.locCompany).then(function (res) {
-        _this.alertShow = true;
+        _this.locCompany = {
+          name: '',
+          address: '',
+          website: ''
+        };
+
+        _this.$emit('success', true);
       });
     }
   },
@@ -60587,7 +60573,11 @@ var render = function() {
       _vm._v(" "),
       _c(
         "form-generic",
-        { ref: "company", attrs: { company: _vm.company } },
+        {
+          ref: "company",
+          attrs: { company: _vm.company },
+          on: { success: _vm.success }
+        },
         [
           _c("b-button", { attrs: { variant: "primary", type: "submit" } }, [
             _vm._v("Save")

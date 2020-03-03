@@ -1,6 +1,7 @@
-import Layout from "../layouts/Layout";
 import Dashboard from "../layouts/Dashboard";
-import UserHome from "../pages/userHome";
+import Login from "../pages/Login";
+
+
 import Companies from "../pages/companies/index";
 import CompanyCreate from "../pages/companies/create";
 import CompanyEdit from "../pages/companies/edit";
@@ -16,16 +17,7 @@ const routes = [
     {
         path: "/",
         name: "home",
-        component: Layout
-    },
-    {
-        path: "/login/",
-        component: Layout,
-        children: [
-            // UserHome will be rendered inside User's <router-view>
-            // when /user/:id is matched
-            { path: "/login/user", component: UserHome }
-        ]
+        component: Login
     },
     {
         path: "/user/:id",

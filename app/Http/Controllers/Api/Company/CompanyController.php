@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api\Company;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Company\CompanyRequest;
 use App\Repo\Company\CompanyInterface;
-use Mail;
+use Illuminate\Http\Request;
+
+
 class CompanyController extends Controller
 {
     protected $company;
-    public function __construct(CompanyInterface $company){
+    public function __construct(CompanyInterface $company)
+    {
 
         $this->company = $company;
     }
@@ -22,7 +24,7 @@ class CompanyController extends Controller
     public function index()
     {
         return response()->json([
-            'companies' => $this->company->index( app()->make('request') )
+            'companies' => $this->company->index(app()->make('request')),
         ]);
     }
 
@@ -44,20 +46,11 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        
-        $this->company->create( $request->all() );
 
-        $to_name = 'Example';
-        $to_email = 'bobby.gerez@yahoo.com';
-        $data = array('name'=>'Monstar', 'body' => 'A test mail');
-        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-        $message->to($to_email, $to_name)
-        ->subject('Laravel Test Mail');
-        $message->from('bobbygerezmonstar@gmail.com','Test Mail');
-        });
+        $this->company->save($request);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -82,7 +75,7 @@ class CompanyController extends Controller
     {
         $company = $this->company->where('id', $id)->first();
         return response()->json([
-            'company' => $company
+            'company' => $company,
         ]);
 
     }
@@ -99,7 +92,7 @@ class CompanyController extends Controller
         $company = $this->company->where('id', $id)->first();
         $company->update($request->all());
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -115,7 +108,7 @@ class CompanyController extends Controller
         $company->delete();
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
 
     }

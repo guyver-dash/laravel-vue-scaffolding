@@ -3,6 +3,7 @@
 namespace App\Repo\Employee;
 
 use App\Model\Employee;
+use App\Model\User;
 use App\Repo\BaseRepository;
 
 class EmployeeRepository extends BaseRepository implements EmployeeInterface
@@ -24,7 +25,7 @@ class EmployeeRepository extends BaseRepository implements EmployeeInterface
             ->when(count($filter) > 1, function ($q) use ($filter) {
                 $q->where('firstname', 'like', '%' . $filter[1] . '%');
             })
-            ->with(['company'])
+            ->with(['company', 'user'])
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($v) {
@@ -32,12 +33,33 @@ class EmployeeRepository extends BaseRepository implements EmployeeInterface
                     'id' => $v->id,
                     'company' => $v->company['name'],
                     'name' => $v->lastname . ', ' . $v->firstname,
-                    'email' => $v->email,
+                    'email' => $v->user['email'],
                     'phone' => $v->phone,
                 ];
             });
 
         return $this->paginate($employees);
+
+    }
+
+    public function store($request)
+    {
+
+        $user = User::create([
+            'email' => $request->email,
+            'password' => str_random(6),
+        ]);
+
+        $user = User::where('id', $user->id)->first();
+
+        $user->roles()->attach($user->id, [
+            'user_id' => $user->id,
+            'role_id' => $request->roleId,
+        ]);
+
+        $newRequest = $request->all();
+        $newRequest['user_id'] = $user->id;
+        $this->create($newRequest);
 
     }
 }

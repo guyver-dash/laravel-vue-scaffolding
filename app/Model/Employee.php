@@ -9,7 +9,7 @@ class Employee extends Model
 {
     protected $table = 'employees';
     protected $fillable = [
-        'firstname', 'lastname', 'company_id', 'email', 'phone',
+        'firstname', 'lastname', 'company_id', 'phone',
     ];
     protected static function boot()
     {
@@ -19,6 +19,12 @@ class Employee extends Model
     public function company()
     {
         return $this->hasOne('App\Model\Company', 'id', 'company_id');
+    }
+
+    public function user()
+    {
+
+        return $this->hasOne('App\Model\User', 'id', 'user_id');
     }
 
 }

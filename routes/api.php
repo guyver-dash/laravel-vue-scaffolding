@@ -8,4 +8,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('companies', 'Api\Company\CompanyController');
     Route::resource('employees', 'Api\Employee\EmployeeController');
     Route::resource('employees_companies', 'Api\Employee\CompanyController');
+    Route::resource('employees_roles', 'Api\Employee\RoleController');
 });

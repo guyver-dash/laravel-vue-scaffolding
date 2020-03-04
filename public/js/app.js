@@ -2676,10 +2676,18 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("employees_companies").then(function (res) {
         _this4.companies = res.data.companies;
       });
+    },
+    getRoles: function getRoles() {
+      var _this5 = this;
+
+      axios.get("employees_roles").then(function (res) {
+        _this5.roles = res.data.roles;
+      });
     }
   },
   mounted: function mounted() {
     this.getCompanies();
+    this.getRoles();
     this.locEmployee = this.employee;
   }
 });
@@ -2894,12 +2902,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2913,8 +2915,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       responseError: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("company", ["company"])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])("company", ["setCompany"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("roles", ["role"])),
+  methods: {
     error: function error(v) {
       this.responseError = true;
       this.alertShow = false;
@@ -2926,9 +2928,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.successDialog = true;
     },
     deletee: function deletee() {
-      this.$refs.company.deletee();
+      this.$refs.role.deletee();
     }
-  })
+  }
 });
 
 /***/ }),
@@ -3046,7 +3048,7 @@ __webpack_require__.r(__webpack_exports__);
     deletee: function deletee() {
       var _this3 = this;
 
-      axios["delete"]("companies/".concat(this.$route.params.id), this.locCompany).then(function (res) {
+      axios["delete"]("roles/".concat(this.$route.params.id), this.locRole).then(function (res) {
         _this3.$emit("success", true);
       })["catch"](function (err) {
         _this3.$emit("error", true);
@@ -3151,11 +3153,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     deletee: function deletee(id) {
       var _this2 = this;
 
-      axios.get("companies/".concat(id, "/edit")).then(function (res) {
-        _this2.setCompany(res.data.company);
+      axios.get("roles/".concat(id, "/edit")).then(function (res) {
+        _this2.setRole(res.data.role);
 
         _this2.$router.push({
-          path: "/companies/".concat(id, "/delete")
+          path: "/roles/".concat(id, "/delete")
         });
       });
     },
@@ -61931,7 +61933,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h5", [_vm._v("Delete Company")]),
+      _c("h5", [_vm._v("Delete Role")]),
       _vm._v(" "),
       _c(
         "b-alert",
@@ -61948,7 +61950,7 @@ var render = function() {
             dismissible: ""
           }
         },
-        [_vm._v("Company deleted successfully")]
+        [_vm._v("Role deleted successfully")]
       ),
       _vm._v(" "),
       _c(
@@ -61963,9 +61965,9 @@ var render = function() {
         ? _c(
             "form-generic",
             {
-              ref: "company",
-              attrs: { company: _vm.company },
-              on: { success: _vm.success, error: _vm.error }
+              ref: "role",
+              attrs: { role: _vm.role },
+              on: { success: _vm.success }
             },
             [
               _c(
@@ -61974,7 +61976,7 @@ var render = function() {
                   attrs: { variant: "danger", type: "submit" },
                   on: { click: _vm.deletee }
                 },
-                [_vm._v("Delete")]
+                [_vm._v("Confirm Delete")]
               )
             ],
             1

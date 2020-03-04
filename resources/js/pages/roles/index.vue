@@ -65,10 +65,10 @@ export default {
       });
     },
     deletee(id) {
-      axios.get(`companies/${id}/edit`).then(res => {
-        this.setCompany(res.data.company);
+      axios.get(`roles/${id}/edit`).then(res => {
+        this.setRole(res.data.role);
         this.$router.push({
-          path: `/companies/${id}/delete`
+          path: `/roles/${id}/delete`
         });
       });
     },

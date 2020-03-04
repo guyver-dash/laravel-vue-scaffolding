@@ -6,11 +6,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class BaseRepository implements BaseInterface
 {
-    
-    public function where($field, $value){
+
+    public function where($field, $value)
+    {
         return $this->modelName->where($field, $value);
     }
-    public function create($array){
+    public function create($array)
+    {
         $this->modelName->create($array);
     }
 
@@ -23,4 +25,6 @@ class BaseRepository implements BaseInterface
             return new LengthAwarePaginator($collection->forPage($request->page, $perPage), $collection->count(), $perPage, $request->page);
         }
     }
+
+    
 }

@@ -17,12 +17,14 @@ class CreateEmployeesTable extends Migration
 
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')
+                ->on('users');
             $table->bigInteger('company_id')->unsigned()->nullable();
             $table->foreign('company_id')->references('id')
                 ->on('companies');
-            $table->string('email')->unique();
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('phone');
             $table->timestamps();
         });

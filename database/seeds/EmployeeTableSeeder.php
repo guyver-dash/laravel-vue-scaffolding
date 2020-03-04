@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Model\Employee;
+use App\Model\User;
+use Illuminate\Database\Seeder;
 
 class EmployeeTableSeeder extends Seeder
 {
@@ -14,13 +15,22 @@ class EmployeeTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 100; $i++) {
+            $user = User::create([
+                'email' => $faker->safeEmail,
+                'password' => str_random(6),
+            ]);
+            $user = User::where('id', $user->id)->first();
+            $user->roles()->attach($user->id, [
+                'user_id' => $user->id,
+                'role_id' => 2,
+            ]);
             Employee::create([
+                'user_id' => $user->id,
                 'firstname' => $faker->firstName($gender = null),
                 'lastname' => $faker->lastName,
                 'company_id' => rand(1, 99),
-                'email' => $faker->safeEmail,
-                'phone' => $faker->phoneNumber
+                'phone' => $faker->phoneNumber,
             ]);
-          }
+        }
     }
 }

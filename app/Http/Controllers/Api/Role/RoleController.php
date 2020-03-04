@@ -99,6 +99,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->role->where('id', $id)->first()->delete();
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

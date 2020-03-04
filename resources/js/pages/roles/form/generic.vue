@@ -46,7 +46,7 @@ export default {
     },
     deletee() {
       axios
-        .delete(`companies/${this.$route.params.id}`, this.locCompany)
+        .delete(`roles/${this.$route.params.id}`, this.locRole)
         .then(res => {
           this.$emit("success", true);
         })

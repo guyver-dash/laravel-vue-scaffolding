@@ -83,10 +83,16 @@ export default {
       axios.get("employees_companies").then(res => {
         this.companies = res.data.companies;
       });
+    },
+    getRoles() {
+      axios.get("employees_roles").then(res => {
+        this.roles = res.data.roles;
+      });
     }
   },
   mounted() {
     this.getCompanies();
+    this.getRoles();
     this.locEmployee = this.employee;
   }
 };

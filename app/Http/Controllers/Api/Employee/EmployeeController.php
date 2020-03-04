@@ -47,7 +47,7 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
 
-        $this->employee->create($request->all());
+        $this->employee->store($request);
 
         return response()->json([
             'success' => true,
@@ -73,8 +73,14 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $e = $this->employee->where('id', $id)
+            ->with(['user'])
+            ->first();
+        $array = $e->only('id', 'company_id', 'firstname', 'lastname', 'phone');
+        $array['email'] = $e->user['email'];
+
         return response()->json([
-            'employee' => $this->employee->where('id', $id)->first(),
+            'employee' => $array,
         ]);
     }
 

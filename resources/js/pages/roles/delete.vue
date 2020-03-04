@@ -1,17 +1,11 @@
 <template>
   <div>
-    <h5>Delete Company</h5>
+    <h5>Delete Role</h5>
     <b-alert variant="danger" :show="alertShow" dismissible>Are you sure you want to delete?</b-alert>
-    <b-alert variant="success" :show="successDialog" dismissible>Company deleted successfully</b-alert>
+    <b-alert variant="success" :show="successDialog" dismissible>Role deleted successfully</b-alert>
     <b-alert variant="info" :show="responseError" dismissible>Integrity constraint...</b-alert>
-    <form-generic
-      :company="company"
-      ref="company"
-      @success="success"
-      @error="error"
-      v-if="successDialog === false"
-    >
-      <b-button variant="danger" type="submit" @click="deletee">Delete</b-button>
+    <form-generic :role="role" ref="role" @success="success" v-if="successDialog === false">
+      <b-button variant="danger" type="submit" @click="deletee">Confirm Delete</b-button>
     </form-generic>
   </div>
 </template>
@@ -31,10 +25,9 @@ export default {
     };
   },
   computed: {
-    ...mapState("company", ["company"])
+    ...mapState("roles", ["role"])
   },
   methods: {
-    ...mapActions("company", ["setCompany"]),
     error(v) {
       this.responseError = true;
       this.alertShow = false;
@@ -46,7 +39,7 @@ export default {
       this.successDialog = true;
     },
     deletee() {
-      this.$refs.company.deletee();
+      this.$refs.role.deletee();
     }
   }
 };

@@ -1,12 +1,15 @@
 import Dashboard from "../layouts/Dashboard";
 import Login from "../pages/Login";
 
+import Roles from "../pages/roles/index";
+import RoleCreate from "../pages/roles/create";
+import RoleEdit from "../pages/roles/edit";
+import RoleDelete from "../pages/roles/delete";
 
 import Companies from "../pages/companies/index";
 import CompanyCreate from "../pages/companies/create";
 import CompanyEdit from "../pages/companies/edit";
 import CompanyDelete from "../pages/companies/delete";
-
 
 import Employees from "../pages/employees/index";
 import EmployeeCreate from "../pages/employees/create";
@@ -29,8 +32,19 @@ const routes = [
         component: Dashboard,
         meta: { needAuth: true },
         children: [
+            { path: "/dashboard/roles", component: Roles },
             { path: "/dashboard/companies", component: Companies },
-            { path: "/dashboard/employees", component: Employees },
+            { path: "/dashboard/employees", component: Employees }
+        ]
+    },
+    {
+        path: "/roles/:id",
+        component: Dashboard,
+        meta: { needAuth: true },
+        children: [
+            { path: "/roles/create", component: RoleCreate },
+            { path: "/roles/:id/edit", component: RoleEdit },
+            { path: "/roles/:id/delete", component: RoleDelete }
         ]
     },
     {

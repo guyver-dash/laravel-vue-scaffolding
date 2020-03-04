@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Mail;
 
 class CompanyRepository extends BaseRepository implements CompanyInterface
 {
-    public function __construct()
+    public function __construct(Company $company)
     {
 
-        $this->modelName = new Company();
+        $this->modelName = $company;
     }
 
     public function index($request)

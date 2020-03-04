@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,6 +45,10 @@ class User extends Authenticatable
     public function company()
     {
         return $this->hasOne('App\Model\Company', 'user_id', 'id');
+    }
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
     }
 
 }

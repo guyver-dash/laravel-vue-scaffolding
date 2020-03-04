@@ -20,4 +20,5 @@ class Employee extends Model
     {
         return $this->hasOne('App\Model\Company', 'id', 'company_id');
     }
+
 }

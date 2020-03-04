@@ -6,8 +6,9 @@
     </p>
     <div style="float: left">
       <b-list-group>
-        <b-list-group-item to="/dashboard/companies" v-if="user.company === null">All Companies</b-list-group-item>
-        <b-list-group-item to="/dashboard/employees">All Employees</b-list-group-item>
+        <b-list-group-item to="/dashboard/roles">Roles</b-list-group-item>
+        <b-list-group-item to="/dashboard/companies">Companies</b-list-group-item>
+        <b-list-group-item to="/dashboard/employees">Employees</b-list-group-item>
       </b-list-group>
     </div>
     <div style="float: left; padding-left: 10px;">

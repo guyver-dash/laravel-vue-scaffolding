@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import users from "./users";
+import roles from "./roles";
 import company from "./company";
 import employees from "./employees";
 import createPersistedState from "vuex-persistedstate";
@@ -11,7 +12,8 @@ const Store = new Vuex.Store({
     modules: {
         users,
         company,
-        employees
+        employees,
+        roles
     }
 });
 

@@ -1,16 +1,30 @@
 <template>
   <b-container class="bv-example-row" fluid>
     <b-row align-h="center">
-      <b-col cols="4" style="padding-top: 200px;">
-        <b-form-input v-model="email" placeholder="Enter your email" class="mb-sm-2" required></b-form-input>
-        <b-form-input
-          type="password"
-          v-model="password"
-          placeholder="Password"
-          class="mb-sm-2"
-          required
-        ></b-form-input>
-        <b-button variant="primary" @click="submit">Submit</b-button>
+      <b-col cols="4" id="form">
+        <b-alert
+          :show="error"
+          dismissible
+          variant="danger"
+          @dismissed="error=false"
+        >{{ errorMessage }}</b-alert>
+        <b-form @submit="onSubmit">
+          <b-input
+            type="email"
+            v-model="email"
+            placeholder="Enter your email"
+            class="mb-sm-2"
+            required
+          ></b-input>
+          <b-input
+            type="password"
+            v-model="password"
+            placeholder="Password"
+            class="mb-sm-2"
+            required
+          ></b-input>
+          <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
       </b-col>
     </b-row>
   </b-container>
@@ -20,13 +34,16 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      error: false,
+      errorMessage: null,
       email: "",
       password: ""
     };
   },
   methods: {
     ...mapActions("users", ["setToken", "setUser"]),
-    submit() {
+    onSubmit(evt) {
+      evt.preventDefault();
       axios
         .post("login", {
           email: this.email,
@@ -37,8 +54,22 @@ export default {
           this.setToken(token);
           this.setUser(res.data.user);
           this.$router.push("/user/dashboard");
+        })
+        .catch(err => {
+          this.error = true;
+          this.errorMessage = err.response.data.error;
         });
     }
   }
 };
 </script>
+
+<style scope>
+#form {
+  margin-top: 200px;
+  padding: 30px;
+  padding-top: 40px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+</style>

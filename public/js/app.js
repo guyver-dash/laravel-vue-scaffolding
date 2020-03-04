@@ -2971,15 +2971,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       alertShow: false
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("company", ["company"])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])("company", ["setCompany"]), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])("roles", ["role"])),
+  methods: {
     success: function success(v) {
       this.alertShow = v;
     },
     update: function update() {
-      this.$refs.company.update();
+      this.$refs.role.update();
     }
-  })
+  }
 });
 
 /***/ }),
@@ -3039,7 +3039,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
-      axios.put("companies/".concat(this.$route.params.id), this.locCompany).then(function (res) {
+      axios.put("roles/".concat(this.$route.params.id), this.locRole).then(function (res) {
         _this2.$emit("success", true);
       });
     },
@@ -3140,11 +3140,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     edit: function edit(id) {
       var _this = this;
 
-      axios.get("companies/".concat(id, "/edit")).then(function (res) {
-        _this.setCompany(res.data.company);
+      axios.get("roles/".concat(id, "/edit")).then(function (res) {
+        _this.setRole(res.data.role);
 
         _this.$router.push({
-          path: "/companies/".concat(id, "/edit")
+          path: "/roles/".concat(id, "/edit")
         });
       });
     },
@@ -62009,19 +62009,19 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h5", [_vm._v("Edit Company")]),
+      _c("h5", [_vm._v("Edit Role")]),
       _vm._v(" "),
       _c(
         "b-alert",
         { attrs: { variant: "success", show: _vm.alertShow, dismissible: "" } },
-        [_vm._v("Company updated successfully.")]
+        [_vm._v("Role updated successfully.")]
       ),
       _vm._v(" "),
       _c(
         "form-generic",
         {
-          ref: "company",
-          attrs: { company: _vm.company },
+          ref: "role",
+          attrs: { role: _vm.role },
           on: { success: _vm.success }
         },
         [
@@ -62074,11 +62074,11 @@ var render = function() {
           required: ""
         },
         model: {
-          value: _vm.role.name,
+          value: _vm.locRole.name,
           callback: function($$v) {
-            _vm.$set(_vm.role, "name", $$v)
+            _vm.$set(_vm.locRole, "name", $$v)
           },
-          expression: "role.name"
+          expression: "locRole.name"
         }
       }),
       _vm._v(" "),
@@ -62091,11 +62091,11 @@ var render = function() {
           "max-rows": "6"
         },
         model: {
-          value: _vm.role.desc,
+          value: _vm.locRole.desc,
           callback: function($$v) {
-            _vm.$set(_vm.role, "desc", $$v)
+            _vm.$set(_vm.locRole, "desc", $$v)
           },
-          expression: "role.desc"
+          expression: "locRole.desc"
         }
       }),
       _vm._v(" "),

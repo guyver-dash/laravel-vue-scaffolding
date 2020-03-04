@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api\Employee;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repo\Employee\EmployeeInterface;
 use App\Http\Requests\Employee\EmployeeRequest;
+use App\Repo\Employee\EmployeeInterface;
+use Illuminate\Http\Request;
+
 class EmployeeController extends Controller
 {
 
     protected $employee;
-    public function __construct(EmployeeInterface $employee){
+    public function __construct(EmployeeInterface $employee)
+    {
 
         $this->employee = $employee;
     }
@@ -22,7 +24,7 @@ class EmployeeController extends Controller
     public function index()
     {
         return response()->json([
-            'employees' => $this->employee->index( app()->make('request') )
+            'employees' => $this->employee->index(app()->make('request')),
         ]);
     }
 
@@ -44,11 +46,11 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        
-        $this->employee->create( $request->all() );
+
+        $this->employee->create($request->all());
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -71,9 +73,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $e = $this->employee->where('id', $id)->first();
         return response()->json([
-            'employee' => $e
+            'employee' => $this->employee->where('id', $id)->first(),
         ]);
     }
 
@@ -84,12 +85,12 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
-        $e = $this->employee->where('id', $id)->update( $request->all() );
-        
+        $this->employee->where('id', $id)->update($request->all());
+
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -103,7 +104,7 @@ class EmployeeController extends Controller
     {
         $this->employee->where('id', $id)->first()->delete();
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

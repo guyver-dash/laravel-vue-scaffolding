@@ -57,10 +57,10 @@ export default {
       });
     },
     edit(id) {
-      axios.get(`companies/${id}/edit`).then(res => {
-        this.setCompany(res.data.company);
+      axios.get(`roles/${id}/edit`).then(res => {
+        this.setRole(res.data.role);
         this.$router.push({
-          path: `/companies/${id}/edit`
+          path: `/roles/${id}/edit`
         });
       });
     },

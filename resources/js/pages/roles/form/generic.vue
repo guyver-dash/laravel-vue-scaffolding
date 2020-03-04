@@ -1,7 +1,7 @@
 <template>
   <b-form @submit="onSubmit">
     <b-input
-      v-model="role.name"
+      v-model="locRole.name"
       id="inline-form-input-name"
       class="mb-sm-2"
       placeholder="Role Name"
@@ -9,7 +9,7 @@
     ></b-input>
     <b-form-textarea
       id="textarea"
-      v-model="role.desc"
+      v-model="locRole.desc"
       placeholder="Description"
       rows="3"
       class="mb-sm-2"
@@ -40,11 +40,9 @@ export default {
       });
     },
     update() {
-      axios
-        .put(`companies/${this.$route.params.id}`, this.locCompany)
-        .then(res => {
-          this.$emit("success", true);
-        });
+      axios.put(`roles/${this.$route.params.id}`, this.locRole).then(res => {
+        this.$emit("success", true);
+      });
     },
     deletee() {
       axios

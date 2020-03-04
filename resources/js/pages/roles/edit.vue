@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h5>Edit Company</h5>
-    <b-alert variant="success" :show="alertShow" dismissible>Company updated successfully.</b-alert>
-    <form-generic :company="company" ref="company" @success="success">
+    <h5>Edit Role</h5>
+    <b-alert variant="success" :show="alertShow" dismissible>Role updated successfully.</b-alert>
+    <form-generic :role="role" ref="role" @success="success">
       <b-button variant="primary" type="submit" @click="update">Update</b-button>
     </form-generic>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 import formGeneric from "./form/generic";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   components: {
     formGeneric
@@ -21,15 +21,14 @@ export default {
     };
   },
   computed: {
-    ...mapState("company", ["company"])
+    ...mapState("roles", ["role"])
   },
   methods: {
-    ...mapActions("company", ["setCompany"]),
     success(v) {
       this.alertShow = v;
     },
     update() {
-      this.$refs.company.update();
+      this.$refs.role.update();
     }
   }
 };

@@ -7,7 +7,6 @@ use App\Http\Requests\Company\CompanyRequest;
 use App\Repo\Company\CompanyInterface;
 use Illuminate\Http\Request;
 
-
 class CompanyController extends Controller
 {
     protected $company;
@@ -73,9 +72,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = $this->company->where('id', $id)->first();
         return response()->json([
-            'company' => $company,
+            'company' => $this->company->where('id', $id)->first(),
         ]);
 
     }
